@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install
+
+# COPY . . we don't need this because the docker-compose file references the local machine
+# but we should keep COPY bc docker-compose might not be forever
+COPY . .
+
+CMD ["npm","run","start"]
+
+# run with 'sudo docker build -f Dockerfile.dev .'
